@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>Vue 3 - training</title>
+</head>
+<body>
+<div id="app">
+    <p>
+        <label for="greeting">What sentence do you want to count the characters?  </label>
+        <input type="text" name="greeting" id="greeting" v-model="greeting">
+    </p>
+    <p>
+        This word: "{{ greeting }}", have {{ greeting.length }} letters
+    </p>
+</div>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+              greeting: 'Hello World'
+            };
+        },
+        mounted() {
+            setTimeout(() => {
+                this.greeting = 'Hi';
+            }, 3000)
+        }
+    }).mount('#app')
+</script>
+</body>
+</html>
