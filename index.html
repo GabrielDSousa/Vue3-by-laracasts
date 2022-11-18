@@ -7,12 +7,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/vue@3"></script>
     <title>Vue 3 - training</title>
+
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+        }
+
+        .text-red {
+            color: red;
+        }
+
+        .text-green {
+            color: green;
+        }
+    </style>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <button :class="active ? 'text-red' : 'text-green'" v-on:click="toggleBtnClass">Click Me</button>
+    </div>
     <script>
         Vue.createApp({
-            
+            data () {
+                return {
+                    active: false
+                };
+            },
+            methods: {
+                toggleBtnClass() {
+                    return this.active = ! this.active;
+                }
+            }
         }).mount('#app')
     </script>
 </body>
