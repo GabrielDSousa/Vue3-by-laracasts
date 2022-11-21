@@ -5,22 +5,20 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/loader.css">
     <script src="https://unpkg.com/vue@3"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Vue 3 - training</title>
 </head>
 <body class="h-full grid place-items-center">
     <div id="app">
-        <app-button>Submit</app-button>
+        <app-button type="primary">Submit</app-button>
+        <app-button type="secondary">Submit</app-button>
+        <app-button type="muted">Submit</app-button>
     </div>
     <script type="module">
-        import AppButton from "./js/components/AppButton.js";
-        let app ={
-            components: {
-                'app-button': AppButton
-            }
-        }
-        Vue.createApp(app).mount('#app')
+        import App from "./js/components/App.js";
+        Vue.createApp(App).mount('#app')
     </script>
 </body>
 </html>
