@@ -9,7 +9,7 @@ export default {
                 {{ title }}
             </h2>
         
-            <ul>
+            <ul class="divide-y divide-slate-600">
                 <assignment 
                     v-for="assignment in assignments" 
                     :key="assignment.id"

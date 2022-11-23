@@ -1,12 +1,13 @@
 export default {
     template: `
-        <li>
+        <li class="p-2">
             <label :for=assignment.id>
                 <input 
                     type="checkbox" 
                     :name=assignment.id 
                     :id=assignment.id 
                     v-model="assignment.complete"
+                    class="mr-2"
                 >
                 {{ assignment.name }}
             </label>
