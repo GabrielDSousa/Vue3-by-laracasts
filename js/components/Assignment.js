@@ -1,6 +1,6 @@
 export default {
     template: `
-        <li class="p-2">
+        <li class="py-2">
             <label :for=assignment.id>
                 <input 
                     type="checkbox" 

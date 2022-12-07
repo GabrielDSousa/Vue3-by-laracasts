@@ -4,14 +4,31 @@ export default {
       'assignment': Assignment
     },
     template: `
-        <section v-show="assignments.length" class="mb-4">
-            <h2 :class="titleClass">
-                {{ title }}
-            </h2>
-        
+        <section v-show="assignments.length" class="mb-2">
+            <header class="flex gap-4 items-baseline">
+                <h2
+                    class="font-bold mb-2 text-lg" 
+                    :class="{
+                        'underline decoration-2': decoration
+                    }, 'decoration-'+color+'-400'"
+                >
+                    {{ title }}
+                </h2>
+                <span>({{ assignments.length }})</span>
+            </header>
+            
+            <div class="flex gap-2 mb-4">
+                <button
+                    @click="currentTag = tag"
+                    v-for="tag in tags"
+                    class="border rounded px-1 py-px text-xs"
+                    :class="{['border-'+color+'-200 text-'+color+'-200']: tag === currentTag}"
+                >{{ tag }}</button>
+            </div>
+            
             <ul class="divide-y divide-slate-600">
                 <assignment 
-                    v-for="assignment in assignments" 
+                    v-for="assignment in filteredAssignments" 
                     :key="assignment.id"
                     :assignment="assignment"
                 ></assignment>
@@ -27,16 +44,24 @@ export default {
         },
         color: {
             type: String,
-            default: null
+            default: "violet"
         }
     },
+    data() {
+      return {
+        currentTag: 'All',
+      }
+    },
     computed: {
-        titleClass() {
-            let base = 'font-bold mb-2 text-lg';
-            let underline = this.decoration ? ' underline decoration-2': ' ';
-            let underlineColor = this.color ? ' decoration-'+this.color+'-400': ' ';
+        filteredAssignments() {
+          if(this.currentTag === 'All') {
+              return this.assignments;
+          }
 
-            return base+underline+underlineColor
+          return this.assignments.filter(a => a.tag === this.currentTag);
+        },
+        tags() {
+            return ['All', ...new Set(this.assignments.map(a => a.tag))]
         }
     }
 }

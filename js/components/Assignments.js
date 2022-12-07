@@ -1,9 +1,9 @@
 import AssignmentList from "./AssignmentList.js";
-import AppButton from "./AppButton.js";
+import AssignmentCreate from "./AssignmentCreate.js";
 export default {
     components: {
         'assignment-list': AssignmentList,
-        'app-button': AppButton
+        'assignment-create': AssignmentCreate
     },
     template: `
         <header>
@@ -12,39 +12,33 @@ export default {
             </h1>
         </header>
 
-        <assignment-list 
-            :assignments="filters.inProgress" 
-            title="in Progress"
-            :decoration=true
-            color="lime"
-        ></assignment-list>
-        <assignment-list 
-            :assignments="filters.completed" 
-            title="Completed"
-            :decoration=true
-            color="emerald"
-        ></assignment-list>
-        
-        <form @submit.prevent="add" class="space-x-2 flex">
-            <input 
-                v-model="newAssignment"
-                placeholder="New assignment..." 
-                type="text" 
-                name="newAssignment" 
-                id="newAssignment" 
-                class="bg-neutral-800 border-b-2 border-slate-600"
-            >
-            <app-button type="primary">Add</app-button>
-        </form>
+        <div class="space-y-4">
+            <div>
+                <assignment-list 
+                    :assignments="filters.inProgress" 
+                    title="in Progress"
+                    :decoration=true
+                    color="lime"
+                ></assignment-list>
+                <assignment-create @creating="add"></assignment-create> 
+            </div>
+            <div>
+                <assignment-list 
+                    :assignments="filters.completed" 
+                    title="Completed"
+                    :decoration=true
+                    color="emerald"
+                ></assignment-list>
+            </div>
+        </div>
     `,
     data() {
         return {
             assignments: [
-                { id:1, name: "Finish project", complete: false },
-                { id:2, name: "Read Chapter 4", complete: false },
-                { id:3, name: "Turn in homework", complete: false }
+                { id:1, name: "Finish project", complete: false, tag: "Vue 3" },
+                { id:2, name: "Read Chapter 4", complete: false, tag: "Google's engineer" },
+                { id:3, name: "Make dinner", complete: false,  tag: "Personal"}
             ],
-            newAssignment: ''
         }
     },
     computed: {
@@ -56,10 +50,10 @@ export default {
         }
     },
     methods: {
-        add() {
+        add(name) {
             this.assignments.push({
                 id: this.uuidv4(),
-                name: this.newAssignment,
+                name: name,
                 completed: false
             })
         },
