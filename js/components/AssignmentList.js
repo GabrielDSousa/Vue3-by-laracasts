@@ -21,10 +21,9 @@ export default {
             </header>
             
             <assignment-tags 
+                v-model:currentTag="currentTag"
                 :initial-tags="assignments.map(a => a.tag)"
-                :current-tag="currentTag"
                 :color="color"
-                @change="currentTag = $event"
             />
             
             <ul class="divide-y divide-slate-600">
