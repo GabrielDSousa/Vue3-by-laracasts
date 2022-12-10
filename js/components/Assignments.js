@@ -12,33 +12,34 @@ export default {
             </h1>
         </header>
 
-        <div class="space-y-4">
-            <div>
-                <assignment-list 
-                    :assignments="filters.inProgress" 
-                    title="in Progress"
-                    :decoration=true
-                    color="lime"
-                ></assignment-list>
-                <assignment-create @creating="add"></assignment-create> 
-            </div>
-            <div>
-                <assignment-list 
-                    :assignments="filters.completed" 
-                    title="Completed"
-                    :decoration=true
-                    color="emerald"
-                ></assignment-list>
-            </div>
-        </div>
+        <section class="flex gap-8">
+            <assignment-list 
+                :assignments="filters.inProgress" 
+                title="in Progress"
+                :decoration=true
+                color="lime"
+            >
+                <assignment-create @creating="add"></assignment-create>     
+            </assignment-list>
+            <assignment-list 
+                v-if="showCompleted"
+                :assignments="filters.completed" 
+                title="Completed"
+                :decoration=true
+                color="emerald"
+                can-toggle
+                @toggle="showCompleted = !showCompleted"
+            ></assignment-list>
+        </section>
     `,
     data() {
         return {
             assignments: [],
+            showCompleted: true
         }
     },
     created() {
-        fetch('http://localhost:3000/assignments')
+        fetch('http://localhost:3001/assignments')
             .then(response => response.json())
             .then(assignments => {
                this.assignments = assignments;
