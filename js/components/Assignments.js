@@ -34,12 +34,15 @@ export default {
     `,
     data() {
         return {
-            assignments: [
-                { id:1, name: "Finish project", complete: false, tag: "Vue 3" },
-                { id:2, name: "Read Chapter 4", complete: false, tag: "Google's engineer" },
-                { id:3, name: "Make dinner", complete: false,  tag: "Personal"}
-            ],
+            assignments: [],
         }
+    },
+    created() {
+        fetch('http://localhost:3000/assignments')
+            .then(response => response.json())
+            .then(assignments => {
+               this.assignments = assignments;
+            });
     },
     computed: {
         filters() {
