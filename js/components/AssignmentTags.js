@@ -1,5 +1,5 @@
 export default {
-    template: `
+  template: `
         <div class="flex gap-2 mb-4">
             <button
                 @click="$emit('update:currentTag', tag)"
@@ -9,14 +9,17 @@ export default {
             >{{ tag }}</button>
         </div>
     `,
-    props: {
-        initialTags: Array,
-        color: String,
-        currentTag: String
+  props: {
+    initialTags: Array,
+    color: {
+      type: String,
+      default: "gray",
     },
-    computed: {
-        tags() {
-            return ['All', ...new Set(this.initialTags)]
-        }
-    }
-}
+    currentTag: String,
+  },
+  computed: {
+    tags() {
+      return ["All", ...new Set(this.initialTags)];
+    },
+  },
+};

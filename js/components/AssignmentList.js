@@ -1,13 +1,19 @@
 import Assignment from "./Assignment.js";
 import AssignmentTags from "./AssignmentTags.js";
+import Panel from "./Panel.js";
 
 export default {
-    components: {
-        'assignment': Assignment,
-        'assignment-tags': AssignmentTags
-    },
-    template: `
-        <section v-show="assignments.length" class="w-60">
+  components: {
+    assignment: Assignment,
+    "assignment-tags": AssignmentTags,
+    panel: Panel,
+  },
+  template: `
+        <panel 
+            v-show="assignments.length" 
+            class="w-80"
+            :color="color"
+        >
             <header class="flex items-start justify-between">
                 <div class="flex gap-2 items-baseline">
                     <h2
@@ -39,36 +45,36 @@ export default {
             </ul>
             
             <slot></slot>
-        </section>
+        </panel>
     `,
-    props: {
-        assignments: Array,
-        title: String,
-        decoration: {
-            type: Boolean,
-            default: false
-        },
-        color: {
-            type: String,
-            default: "violet"
-        },
-        canToggle: {
-            type:Boolean,
-            default:false
-        }
+  props: {
+    assignments: Array,
+    title: String,
+    decoration: {
+      type: Boolean,
+      default: false,
     },
-    data() {
-      return {
-        currentTag: 'All',
+    color: {
+      type: String,
+      default: "gray",
+    },
+    canToggle: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      currentTag: "All",
+    };
+  },
+  computed: {
+    filteredAssignments() {
+      if (this.currentTag === "All") {
+        return this.assignments;
       }
-    },
-    computed: {
-        filteredAssignments() {
-          if(this.currentTag === 'All') {
-              return this.assignments;
-          }
 
-          return this.assignments.filter(a => a.tag === this.currentTag);
-        }
-    }
-}
+      return this.assignments.filter((a) => a.tag === this.currentTag);
+    },
+  },
+};

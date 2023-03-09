@@ -9,7 +9,7 @@ export default {
                 type="text" 
                 name="newAssignment" 
                 id="newAssignment" 
-                class="bg-neutral-800 border-b-2 border-slate-600 w-full"
+                class="bg-neutral-700 border-b-2 border-slate-600 w-full"
             >
             <app-button type="primary">Add</app-button>
         </form>
